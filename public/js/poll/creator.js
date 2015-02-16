@@ -34,38 +34,76 @@
 
 	Poll.creator = {
 		show: function(textarea) {
-			window.templates.parse('poll/creator', {}, function(html) {
-				bootbox.dialog({
-					title: 'Create a poll',
-					message: html,
-					buttons: {
-						cancel: {
-							label: 'Cancel',
-							className: 'btn-default',
-							callback: function(e) {
-								return Poll.creator.cancel(e, textarea);
-							}
-						},
-						save: {
-							label: 'Done',
-							className: 'btn-primary',
-							callback: function(e) {
-								return Poll.creator.save(e, textarea);
+			if( $(".title.form-control") && !$(".title.form-control").is(":disabled") )
+			{
+				window.templates.parse('poll/creator', {}, function(html) {
+					bootbox.dialog({
+						title: 'Crea una encuesta',
+						message: html,
+						buttons: {
+							cancel: {
+								label: 'Cancelar',
+								className: 'btn-default',
+								callback: function(e) {
+									return Poll.creator.cancel(e, textarea);
+								}
+							},
+							save: {
+								label: 'Crear',
+								className: 'btn-primary',
+								callback: function(e) {
+									return Poll.creator.save(e, textarea);
+								}
 							}
 						}
-					}
-				}).find('#pollInputEnd').datetimepicker({
-						useSeconds: false,
-						useCurrent: false,
-						minDate: new Date(),
-						icons: {
-							time: "fa fa-clock-o",
-							date: "fa fa-calendar",
-							up: "fa fa-arrow-up",
-							down: "fa fa-arrow-down"
+					}).find('#pollInputEnd').datetimepicker({
+							useSeconds: false,
+							useCurrent: false,
+							minDate: new Date(),
+							icons: {
+								time: "fa fa-clock-o",
+								date: "fa fa-calendar",
+								up: "fa fa-arrow-up",
+								down: "fa fa-arrow-down"
+							}
+						});
+				});
+			}
+			else
+			{
+				window.templates.parse('poll/creator', {}, function(html) {
+					bootbox.dialog({
+						title: 'No es posible crear la encuesta',
+						message: "<h1>No eres el creador de este topic.</h1>",
+						buttons: {
+							cancel: {
+								label: 'Cancelar',
+								className: 'btn-default',
+								callback: function(e) {
+									return Poll.creator.cancel(e, textarea);
+								}
+							},
+							save: {
+								label: 'Aceptar',
+								className: 'btn-primary',
+								callback: function(e) {
+									return Poll.creator.cancel(e, textarea);
+								}
+							}
 						}
-					});
-			});
+					}).find('#pollInputEnd').datetimepicker({
+							useSeconds: false,
+							useCurrent: false,
+							minDate: new Date(),
+							icons: {
+								time: "fa fa-clock-o",
+								date: "fa fa-calendar",
+								up: "fa fa-arrow-up",
+								down: "fa fa-arrow-down"
+							}
+						});
+				});
+			}
 		},
 		cancel: function(e, textarea) {
 			return true;
