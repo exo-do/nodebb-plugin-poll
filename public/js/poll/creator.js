@@ -27,6 +27,21 @@
 		require(['composer', 'string'], function(composer, String) {
 			S = String;
 			composer.addButton('fa fa-bar-chart-o', Poll.creator.show);
+		
+			$(window).on('action:composer.loaded', function(event, data) {
+			  	if( $(".title.form-control").is(":disabled") )
+				{	// Si el editor de titulo de topic esta activado, puedes hacer encuesta
+					setTimeout( function(){
+						$(".fa.fa-bar-chart-o").parent().hide();
+					}  ,100); // Hay que dar tiempo a que lo cargue.. :S
+				}
+				else
+				{
+					setTimeout( function(){
+						$(".fa.fa-bar-chart-o").parent().show();
+					}  ,100);
+				}
+			});
 		});
 	}
 
