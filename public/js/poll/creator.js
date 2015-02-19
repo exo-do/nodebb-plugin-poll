@@ -29,18 +29,16 @@
 			composer.addButton('fa fa-bar-chart-o', Poll.creator.show);
 		
 			$(window).on('action:composer.loaded', function(event, data) {
-			  	if( $(".title.form-control").is(":disabled") )
-				{	// Si el editor de titulo de topic esta activado, puedes hacer encuesta
-					setTimeout( function(){
+				setTimeout( function(){
+				  	if( $(".title.form-control") && $(".title.form-control").is(":disabled") )
+					{	// Si el editor de titulo de topic esta activado, puedes hacer encuesta
 						$(".fa.fa-bar-chart-o").parent().hide();
-					}  ,100); // Hay que dar tiempo a que lo cargue.. :S
-				}
-				else
-				{
-					setTimeout( function(){
+					}
+					else
+					{
 						$(".fa.fa-bar-chart-o").parent().show();
-					}  ,100);
-				}
+					}
+				}, 100); // Hay que dar tiempo a que se muestre para poder desactivar bien ..
 			});
 		});
 	}
