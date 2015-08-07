@@ -2,7 +2,7 @@
 	window.Poll = {
 		load: function(data) {
 			$(window).one('action:ajaxify.contentLoaded', function () {
-				Poll.sockets.emit.load(data.pollid, function(err, poll) {
+				Poll.sockets.emit.load(data, function(err, poll) {
 					if (!err) {
 						Poll.view.init(poll, function(pollView) {
 							if (parseInt(poll.info.deleted, 10) === 1 || parseInt(poll.info.ended, 10) === 1) {
