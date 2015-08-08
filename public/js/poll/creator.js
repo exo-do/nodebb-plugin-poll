@@ -30,15 +30,15 @@
 		
 			$(window).on('action:composer.loaded', function(event, data) {
 				setTimeout( function(){
-				  	if( $(".title.form-control") && $(".title.form-control").is(":disabled") )
-					{	// Si el editor de titulo de topic esta activado, puedes hacer encuesta
+				  	if( !$(".form-control.category-list")[0] || $($(".form-control.category-list")[0]).is(":disabled") )
+					{	// Si el editor de titulo de topic esta desactivado, no puedes hacer encuesta
 						$(".fa.fa-bar-chart-o").parent().hide();
 					}
 					else
 					{
 						$(".fa.fa-bar-chart-o").parent().show();
 					}
-				}, 100); // Hay que dar tiempo a que se muestre para poder desactivar bien ..
+				}, 150); // Hay que dar tiempo a que se muestre para poder desactivar bien ..
 			});
 		});
 	}
